@@ -1,6 +1,13 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Trending from "./components/Trending";
+import Benefits from "./components/Benefits";
+import Genres from "./components/Genres";
+import Collections from "./components/Collections";
+import Spotlight from "./components/Spotlight";
+import News from "./components/News";
+import Marquee from "./components/Marquee";
+import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
 function App() {
@@ -10,7 +17,14 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <Benefits />
         <Trending />
+        <Genres />
+        <Collections />
+        <Spotlight />
+        <News />
+        <Marquee />
+        <CTA />
       </main>
       <Footer />
     </div>

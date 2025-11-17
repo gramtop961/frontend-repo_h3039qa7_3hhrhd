@@ -1,4 +1,5 @@
-import { Play, Star, Flame } from "lucide-react";
+import { Star, Flame, Play } from "lucide-react";
+import { motion } from "framer-motion";
 
 const demoAnime = [
   {
@@ -35,9 +36,16 @@ const demoAnime = [
   },
 ];
 
-function Card({ item }) {
+function Card({ item, i }) {
   return (
-    <a href={`/anime/${item.id}`} className="group relative rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition">
+    <motion.a
+      href={`/anime/${item.id}`}
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.45, delay: i * 0.05 }}
+      className="group relative rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
+    >
       <img src={item.cover} alt={item.title} className="h-56 w-full object-cover group-hover:scale-105 transition-transform" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-4">
@@ -50,10 +58,16 @@ function Card({ item }) {
         </div>
         <h3 className="text-white font-semibold drop-shadow">{item.title}</h3>
       </div>
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute inset-0 bg-black/40" />
+        <button className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2 bg-fuchsia-600 hover:bg-fuchsia-500 text-white px-3 py-1.5 rounded-lg">
+          <Play className="size-4" /> Vizionare rapidă
+        </button>
+      </div>
       <div className="absolute top-3 right-3 bg-black/50 text-white/90 px-2 py-1 rounded text-xs inline-flex items-center gap-1">
         <Flame className="size-3 text-fuchsia-300" /> Trending
       </div>
-    </a>
+    </motion.a>
   );
 }
 
@@ -70,8 +84,8 @@ export default function Trending() {
         </div>
 
         <div className="grid gap-4 sm:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {demoAnime.map((item) => (
-            <Card key={item.id} item={item} />
+          {demoAnime.map((item, i) => (
+            <Card key={item.id} item={item} i={i} />
           ))}
         </div>
       </div>
